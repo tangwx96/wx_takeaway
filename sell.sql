@@ -1,24 +1,24 @@
 create table product_info(
      product_id varchar(32) not null;
-     product_name varchar(64) not null comment 'ÉÌÆ·Ãû³Æ',
-     product_price decimal(8,2) not null comment 'µ¥¼Û',
-     product_stock int not null comment '¿â´æ',
-     product_description varchar(64) comment 'ÃèÊö';
-     product_icon varchar(512) comment 'Ğ¡Í¼';
-     category_type int not null comment '';
-     create_time timestamp not null default current_timestamp comment '´´½¨Ê±¼ä';
-     update_time timestamp not null default current_timestamp on update current_timestamp comment 'ĞŞ¸ÄÊ±¼ä';
+     product_name varchar(64) not null comment 'å•†å“åç§°',
+     product_price decimal(8,2) not null comment 'å•ä»·',
+     product_stock int not null comment 'åº“å­˜',
+     product_description varchar(64) comment 'æè¿°';
+     product_icon varchar(512) comment 'å°å›¾';
+     category_type int not null comment 'ç±»ç›®ç¼–å·';
+     create_time timestamp not null default current_timestamp comment 'åˆ›å»ºæ—¶é—´';
+     update_time timestamp not null default current_timestamp on update current_timestamp comment 'ä¿®æ”¹æ—¶é—´';
      primary key ('product_id')
-)comment 'ÉÌÆ·±í';
+)comment 'å•†å“è¡¨';
 
 
 create table product_category(
    'category_id' int not null auto_increment,
-   'category_name' varchar(64) not null comment '',
-   'category_type' int not null comment '',
-   create_time timestamp not null default current_timestamp comment '´´½¨Ê±¼ä';
-   update_time timestamp not null default current_timestamp on update current_timestamp comment 'ĞŞ¸ÄÊ±¼ä';
-   primary key ('category_id')
+   'category_name' varchar(64) not null comment 'ç±»ç›®åå­—',
+   'category_type' int not null comment 'ç±»ç›®ç¼–å·',
+   create_time timestamp not null default current_timestamp comment 'åˆ›å»ºæ—¶é—´';
+   update_time timestamp not null default current_timestamp on update current_timestamp comment 'ä¿®æ”¹æ—¶é—´';
+   primary key ('category_id'),
    unique key 'uqe_category_type' ('category_type')
 
 
@@ -26,32 +26,32 @@ create table product_category(
 
 create table order_master(
      order_id varchar(32) not null,
-     buyer_name varchar(32) not null comment '';
-     buyer_phone varchar(32) not null comment '';
-     buyer_address varchar(32) not null comment '';
-     buyer_openid varchar(32) not null comment '';
-     order_amount  decimal(8,2) not null comment '';
-     order_status tinyint(3) not null default 0 comment '';
-     pay_status tinyint(3) not null default 0 comment '';
-     create_time timestamp not null default current_timestamp comment '´´½¨Ê±¼ä';
-     update_time timestamp not null default current_timestamp on update current_timestamp comment 'ĞŞ¸ÄÊ±¼ä';
+     buyer_name varchar(32) not null comment 'ä¹°å®¶åå­—';
+     buyer_phone varchar(32) not null comment 'ä¹°å®¶ç”µè¯';
+     buyer_address varchar(128) not null comment 'ä¹°å®¶åœ°å€';
+     buyer_openid varchar(64) not null comment 'ä¹°å®¶å¾®ä¿¡openid';
+     order_amount  decimal(8,2) not null comment 'è®¢å•æ€»é‡‘é¢';
+     order_status tinyint(3) not null default 0 comment 'è®¢å•çŠ¶æ€ï¼Œé»˜è®¤0æ–°ä¸‹å•';
+     pay_status tinyint(3) not null default 0 comment 'æ”¯ä»˜çŠ¶æ€ï¼Œé»˜è®¤0æœªæ”¯ä»˜';
+     create_time timestamp not null default current_timestamp comment 'åˆ›å»ºæ—¶é—´';
+     update_time timestamp not null default current_timestamp on update current_timestamp comment 'ä¿®æ”¹æ—¶é—´';
  primary key ('order_id')
- key idx_buyer_openid ('buyer_id')
+ key 'idx_buyer_openid' ('buyer_openid')
 
-)comment '¶©µ¥±í';
+)comment 'è®¢å•è¡¨';
 
 create table order_detail(
 detail_id varchar(32) not null,
   order_id varchar(32) not null,
    product_id varchar(32) not null;
-    product_name varchar(64) not null comment 'ÉÌÆ·Ãû³Æ',
-     product_price decimal(8,2) not null comment 'µ¥¼Û',
-      product_quantity int not null comment 'ÊıÁ¿',
-           product_icon varchar(512) comment 'Ğ¡Í¼';
-       create_time timestamp not null default current_timestamp comment '´´½¨Ê±¼ä';
-     update_time timestamp not null default current_timestamp on update current_timestamp comment 'ĞŞ¸ÄÊ±¼ä';
+    product_name varchar(64) not null comment 'å•†å“åç§°',
+     product_price decimal(8,2) not null comment 'å•†å“ä»·æ ¼',
+      product_quantity int not null comment 'å•†å“æ•°é‡',
+           product_icon varchar(512) comment 'å°å›¾',
+       create_time timestamp not null default current_timestamp comment 'åˆ›å»ºæ—¶é—´';
+     update_time timestamp not null default current_timestamp on update current_timestamp comment 'ä¿®æ”¹æ—¶é—´';
       primary key ('detail_id'),
       key 'idx_order_id' ('order_id')
-)comment '';
+)comment 'è®¢å•è¯¦æƒ…è¡¨';
 
 
